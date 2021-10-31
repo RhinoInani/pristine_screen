@@ -1,0 +1,10 @@
+Target dependency graph (4 targets)
+FlutterMacOS in Pods, no dependencies
+desktop_window in Pods, depends on:
+FlutterMacOS in Pods (explicit)
+path_provider_macos in Pods, depends on:
+FlutterMacOS in Pods (explicit)
+Pods-Runner in Pods, depends on:
+FlutterMacOS in Pods (explicit)
+desktop_window in Pods (explicit)
+path_provider_macos in Pods (explicit)
