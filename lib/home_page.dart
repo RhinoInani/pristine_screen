@@ -1,4 +1,6 @@
 import 'package:Pristine_Screen/screen_cleaning.dart';
+import 'package:Pristine_Screen/settings_screen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -15,10 +17,6 @@ class HomePage extends StatelessWidget {
       },
       child: Scaffold(
         backgroundColor: Colors.black,
-        // floatingActionButton: FloatingActionButton(
-        //   onPressed: () {}, //5,23,39
-        //   backgroundColor: Color.fromRGBO(5, 23, 39, 1),
-        // ),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -38,9 +36,10 @@ class HomePage extends StatelessWidget {
                   }));
                 },
                 style: OutlinedButton.styleFrom(
-                    shape: const StadiumBorder(),
-                    padding: EdgeInsets.all(size.longestSide * 0.02),
-                    side: const BorderSide(color: Colors.white)),
+                  shape: const StadiumBorder(),
+                  padding: EdgeInsets.all(size.longestSide * 0.02),
+                  side: const BorderSide(color: Colors.white),
+                ),
                 child: RichText(
                   text: TextSpan(
                     style: TextStyle(
@@ -65,6 +64,20 @@ class HomePage extends StatelessWidget {
               ),
             ],
           ),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
+        floatingActionButton: FloatingActionButton(
+          tooltip: "Settings",
+          backgroundColor: Colors.black,
+          splashColor: Colors.black,
+          hoverColor: Colors.transparent,
+          onPressed: () {
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: (BuildContext context) {
+              return const SettingScreen();
+            }));
+          },
+          child: const Icon(Icons.settings),
         ),
       ),
     );
