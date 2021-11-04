@@ -1,6 +1,7 @@
 import 'package:Pristine_Screen/main.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'components/setting_card.dart';
 
@@ -12,6 +13,34 @@ class SettingScreen extends StatefulWidget {
 }
 
 class _SettingScreenState extends State<SettingScreen> {
+  Future<void> _launchInBrowser(String url) async {
+    if (await canLaunch(url)) {
+      await launch(
+        url,
+        forceSafariVC: false,
+        forceWebView: false,
+        headers: <String, String>{'': ''},
+      );
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  List<String> urls = [
+    "https://www.instagram.com/pristinescreen/",
+    "https://github.com/RhinoInani/pristine_screen",
+    "https://forms.gle/miQAhC2qUixaEvi87",
+    "https://forms.gle/MUhdenYRC2AFJwCz8",
+    "smarturl.it/pristinescreen",
+  ];
+  List<String> titles = [
+    "Instagram",
+    "Github",
+    "Feature Request",
+    "Report a bug",
+    "Share",
+  ];
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -19,61 +48,89 @@ class _SettingScreenState extends State<SettingScreen> {
       appBar: AppBar(
         backgroundColor: Colors.black,
         elevation: 0,
-        iconTheme: const IconThemeData(
+        iconTheme: IconThemeData(
           color: Colors.white,
+          size: size.longestSide * 0.03,
         ),
       ),
       backgroundColor: Colors.black,
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Text(
-              "Settings",
-              style: TextStyle(
-                fontSize: size.longestSide * 0.07,
-                color: Colors.white,
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(
-                  horizontal: MediaQuery.of(context).size.width * 0.035),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
+      body: Focus(
+        autofocus: true,
+        descendantsAreFocusable: true,
+        onKey: (FocusNode node, RawKeyEvent event) {
+          return KeyEventResult.handled;
+        },
+        child: ListView.builder(
+          itemCount: 5,
+          itemBuilder: (BuildContext context, int index) {
+            if (index == 0) {
+              return Column(
+                children: [
                   Text(
-                    "Clean on Launch",
+                    "Settings",
                     style: TextStyle(
-                      fontSize: MediaQuery.of(context).size.longestSide * 0.03,
+                      fontSize: size.longestSide * 0.07,
                       color: Colors.white,
                     ),
                   ),
-                  Tooltip(
-                    message: cleanOnLaunch ? "On" : "Off",
-                    child: Switch.adaptive(
-                      value: cleanOnLaunch,
-                      onChanged: (value) async {
-                        final prefs = await SharedPreferences.getInstance();
-                        setState(() {
-                          cleanOnLaunch = value;
-                        });
-                        prefs.setBool('onLaunch', value);
-                      },
-                      inactiveTrackColor: Colors.white10,
-                      activeTrackColor: Colors.black,
-                      activeColor: Colors.white24,
+                  Container(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: MediaQuery.of(context).size.width * 0.035),
+                    height: MediaQuery.of(context).size.height * 0.135,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text(
+                          "Clean on Launch",
+                          style: TextStyle(
+                            fontSize:
+                                MediaQuery.of(context).size.longestSide * 0.03,
+                            color: Colors.white,
+                          ),
+                        ),
+                        Tooltip(
+                          message: cleanOnLaunch ? "On" : "Off",
+                          child: Switch.adaptive(
+                            value: cleanOnLaunch,
+                            onChanged: (value) async {
+                              final prefs =
+                                  await SharedPreferences.getInstance();
+                              setState(() {
+                                cleanOnLaunch = value;
+                              });
+                              prefs.setBool('onLaunch', value);
+                            },
+                            inactiveTrackColor: Colors.white10,
+                            activeTrackColor: Colors.black,
+                            activeColor: Colors.white24,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
+                  SettingsCard(
+                    icon: const Icon(Icons.arrow_forward_ios_rounded),
+                    pressIcon: () {
+                      _launchInBrowser(
+                        "${urls[index]}",
+                      );
+                    },
+                    text: "${titles[index]}",
+                  ),
                 ],
-              ),
-            ),
-            SettingsCard(
-              icon: const Icon(Icons.arrow_forward_ios_rounded),
-              pressIcon: () {
-                print("test");
-              },
-              text: "Test",
-            ),
-          ],
+              );
+            } else {
+              return SettingsCard(
+                icon: const Icon(Icons.arrow_forward_ios_rounded),
+                pressIcon: () {
+                  _launchInBrowser(
+                    "${urls[index]}",
+                  );
+                },
+                text: "${titles[index]}",
+              );
+            }
+          },
         ),
       ),
     );

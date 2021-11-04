@@ -77,7 +77,10 @@ class HomePage extends StatelessWidget {
               return const SettingScreen();
             }));
           },
-          child: const Icon(Icons.settings),
+          child: Icon(
+            Icons.settings,
+            size: size.longestSide * 0.03,
+          ),
         ),
       ),
     );
