@@ -31,7 +31,7 @@ class _SettingScreenState extends State<SettingScreen> {
     "https://github.com/RhinoInani/pristine_screen",
     "https://forms.gle/miQAhC2qUixaEvi87",
     "https://forms.gle/MUhdenYRC2AFJwCz8",
-    "smarturl.it/pristinescreen",
+    "https://smarturl.it/pristinescreen",
   ];
   List<String> titles = [
     "Instagram",
@@ -61,7 +61,7 @@ class _SettingScreenState extends State<SettingScreen> {
           return KeyEventResult.handled;
         },
         child: ListView.builder(
-          itemCount: 5,
+          itemCount: titles.length + 1,
           itemBuilder: (BuildContext context, int index) {
             if (index == 0) {
               return Column(
@@ -118,6 +118,28 @@ class _SettingScreenState extends State<SettingScreen> {
                     text: "${titles[index]}",
                   ),
                 ],
+              );
+            } else if (index == titles.length) {
+              return SettingsCard(
+                icon: const Icon(Icons.arrow_forward_ios_rounded),
+                pressIcon: () {
+                  showAboutDialog(
+                      context: context,
+                      applicationVersion: '1.0.1',
+                      applicationName: 'Pristine Screen',
+                      children: [
+                        Text(
+                          'Created by Rohin Inani',
+                        ),
+                        Divider(
+                          height: 10,
+                          color: Colors.black,
+                          thickness: 0.5,
+                        ),
+                        Text('rhino.inani@gmail.com'),
+                      ]);
+                },
+                text: "About",
               );
             } else {
               return SettingsCard(
