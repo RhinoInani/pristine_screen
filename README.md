@@ -10,6 +10,8 @@ Download now on the Mac App Store: https://apps.apple.com/us/app/pristine-screen
 
 *Release Notes:*
 
+11/7 - 1.0.2 - Bug fixes and Enhancements. (Thanks to Gino #2 for finding it).
+
 11/3 - 1.0.1: - *NEW* Settings Screen to view and interact with resources.
               - *NEW* Feature: Start cleaning mode on launch. Allows for even faster cleaning.
 

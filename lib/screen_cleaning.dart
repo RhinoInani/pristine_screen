@@ -36,7 +36,6 @@ class _ScreenCleaningPageState extends State<ScreenCleaningPage>
           ..addListener(() {
             setState(() {});
           });
-
     super.initState();
   }
 
@@ -67,7 +66,7 @@ class _ScreenCleaningPageState extends State<ScreenCleaningPage>
       child: RawKeyboardListener(
         focusNode: spaceFocus,
         onKey: (RawKeyEvent key) {
-          if (key.isKeyPressed(LogicalKeyboardKey.space)) {
+          if (key.character == " ") {
             _animationController.forward();
             if (_animationController.isCompleted) {
               DesktopWindow.setFullScreen(false);
