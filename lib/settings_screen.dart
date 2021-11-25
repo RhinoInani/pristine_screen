@@ -1,5 +1,6 @@
 import 'package:Pristine_Screen/main.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hsvcolor_picker/flutter_hsvcolor_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -41,19 +42,43 @@ class _SettingScreenState extends State<SettingScreen> {
     "Share",
   ];
 
+  void openColorDialog(context) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return Container(
+            child: Column(
+              children: [
+                ColorPicker(
+                  color: background,
+                  pickerOrientation: PickerOrientation.portrait,
+                  onChanged: (value) {
+                    setState(() {
+                      background = Color.fromRGBO(
+                          value.red, value.green, value.blue, value.opacity);
+                    });
+                  },
+                  initialPicker: Picker.paletteHue,
+                ),
+              ],
+            ),
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: background,
         elevation: 0,
         iconTheme: IconThemeData(
           color: Colors.white,
           size: size.longestSide * 0.03,
         ),
       ),
-      backgroundColor: Colors.black,
+      backgroundColor: background,
       body: Focus(
         autofocus: true,
         descendantsAreFocusable: true,
@@ -108,6 +133,29 @@ class _SettingScreenState extends State<SettingScreen> {
                       ],
                     ),
                   ),
+                  Container(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: MediaQuery.of(context).size.width * 0.035),
+                    height: MediaQuery.of(context).size.height * 0.135,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text(
+                          "Change Color",
+                          style: TextStyle(
+                            fontSize:
+                                MediaQuery.of(context).size.longestSide * 0.03,
+                            color: Colors.white,
+                          ),
+                        ),
+                        OutlinedButton(
+                            onPressed: () {
+                              openColorDialog(context);
+                            },
+                            child: Text("Color"))
+                      ],
+                    ),
+                  ),
                   SettingsCard(
                     icon: const Icon(Icons.arrow_forward_ios_rounded),
                     pressIcon: () {
@@ -125,7 +173,7 @@ class _SettingScreenState extends State<SettingScreen> {
                 pressIcon: () {
                   showAboutDialog(
                       context: context,
-                      applicationVersion: '1.0.1',
+                      applicationVersion: '1.0.2',
                       applicationName: 'Pristine Screen',
                       children: [
                         Text(

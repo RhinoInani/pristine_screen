@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:Pristine_Screen/main.dart';
 import 'package:desktop_window/desktop_window.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -61,7 +62,13 @@ class _ScreenCleaningPageState extends State<ScreenCleaningPage>
       autofocus: true,
       descendantsAreFocusable: true,
       onKey: (FocusNode node, RawKeyEvent event) {
-        return KeyEventResult.handled;
+        if (event.isMetaPressed) {
+          return KeyEventResult.handled;
+        } else if (event.physicalKey != PhysicalKeyboardKey.space) {
+          return KeyEventResult.handled;
+        } else {
+          return KeyEventResult.handled;
+        }
       },
       child: RawKeyboardListener(
         focusNode: spaceFocus,
@@ -80,51 +87,45 @@ class _ScreenCleaningPageState extends State<ScreenCleaningPage>
           }
         },
         child: Scaffold(
-          backgroundColor: Colors.black,
+          backgroundColor: background,
           body: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
+            child: Stack(
               children: [
-                Stack(
-                  children: [
-                    IgnorePointer(
-                      child: Container(
-                        width: size.width * 0.5,
-                        height: size.height * 0.1,
-                        padding: EdgeInsets.all(size.height * 0.02),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          border: Border.all(
-                            color: Colors.grey[400]!,
-                            width: 0.7,
-                          ),
-                          color: Colors.transparent,
-                        ),
-                        child: Text(
-                          "Press the space bar for 3 seconds "
-                          "\nto get out of screen cleaning mode",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: size.longestSide * 0.012),
-                        ),
+                IgnorePointer(
+                  child: Container(
+                    width: size.width * 0.5,
+                    height: size.height * 0.1,
+                    padding: EdgeInsets.all(size.height * 0.02),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      border: Border.all(
+                        color: Colors.grey[400]!,
+                        width: 0.7,
                       ),
+                      color: Colors.transparent,
                     ),
-                    Container(
-                      width: _animation.value,
-                      height: size.height * 0.1,
-                      padding: EdgeInsets.all(size.height * 0.02),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(15),
-                        border: Border.all(
-                          color: Colors.grey[400]!,
-                          width: 0.7,
-                        ),
-                      ),
+                    child: Text(
+                      "Press the space bar for 3 seconds "
+                      "\nto get out of cleaning mode",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: size.longestSide * 0.012),
                     ),
-                  ],
+                  ),
+                ),
+                Container(
+                  width: _animation.value,
+                  height: size.height * 0.1,
+                  padding: EdgeInsets.all(size.height * 0.02),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(15),
+                    border: Border.all(
+                      color: Colors.grey[400]!,
+                      width: 0.7,
+                    ),
+                  ),
                 ),
               ],
             ),

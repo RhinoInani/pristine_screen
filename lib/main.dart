@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'home_page.dart';
 
 bool cleanOnLaunch = false;
+Color background = Color.fromRGBO(0, 0, 0, 1);
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,13 +34,28 @@ class _MyAppState extends State<MyApp> {
     cleanOnLaunch = prefs.getBool('onLaunch')!;
   }
 
-  final shortcuts = Map.of(WidgetsApp.defaultShortcuts)
-    ..remove(LogicalKeySet(LogicalKeyboardKey.escape));
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      shortcuts: shortcuts,
+      shortcuts: Map.of(WidgetsApp.defaultShortcuts)
+        ..remove(LogicalKeySet(
+            LogicalKeyboardKey.meta,
+            LogicalKeyboardKey.escape,
+            LogicalKeyboardKey.brightnessUp,
+            LogicalKeyboardKey.brightnessDown)),
+      actions: {
+        ...WidgetsApp.defaultActions
+          ..remove(LogicalKeySet(
+              LogicalKeyboardKey.meta,
+              LogicalKeyboardKey.escape,
+              LogicalKeyboardKey.brightnessUp,
+              LogicalKeyboardKey.brightnessDown)),
+        ActivateAction: CallbackAction(
+          onInvoke: (Intent intent) {
+            return null;
+          },
+        ),
+      },
       title: 'Screen Cleaner',
       theme: ThemeData(fontFamily: 'Museo Moderno'),
       debugShowCheckedModeBanner: false,

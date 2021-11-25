@@ -1,3 +1,4 @@
+import 'package:Pristine_Screen/main.dart';
 import 'package:Pristine_Screen/screen_cleaning.dart';
 import 'package:Pristine_Screen/settings_screen.dart';
 import 'package:flutter/cupertino.dart';
@@ -16,7 +17,7 @@ class HomePage extends StatelessWidget {
         return KeyEventResult.handled;
       },
       child: Scaffold(
-        backgroundColor: Colors.black,
+        backgroundColor: background,
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
