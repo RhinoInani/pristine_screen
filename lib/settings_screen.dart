@@ -133,29 +133,29 @@ class _SettingScreenState extends State<SettingScreen> {
                       ],
                     ),
                   ),
-                  Container(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: MediaQuery.of(context).size.width * 0.035),
-                    height: MediaQuery.of(context).size.height * 0.135,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text(
-                          "Change Color",
-                          style: TextStyle(
-                            fontSize:
-                                MediaQuery.of(context).size.longestSide * 0.03,
-                            color: Colors.white,
-                          ),
-                        ),
-                        OutlinedButton(
-                            onPressed: () {
-                              openColorDialog(context);
-                            },
-                            child: Text("Color"))
-                      ],
-                    ),
-                  ),
+                  // Container(
+                  //   padding: EdgeInsets.symmetric(
+                  //       horizontal: MediaQuery.of(context).size.width * 0.035),
+                  //   height: MediaQuery.of(context).size.height * 0.135,
+                  //   child: Row(
+                  //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //     children: <Widget>[
+                  //       Text(
+                  //         "Change Color",
+                  //         style: TextStyle(
+                  //           fontSize:
+                  //               MediaQuery.of(context).size.longestSide * 0.03,
+                  //           color: Colors.white,
+                  //         ),
+                  //       ),
+                  //       OutlinedButton(
+                  //           onPressed: () {
+                  //             openColorDialog(context);
+                  //           },
+                  //           child: Text("Color"))
+                  //     ],
+                  //   ),
+                  // ),
                   SettingsCard(
                     icon: const Icon(Icons.arrow_forward_ios_rounded),
                     pressIcon: () {

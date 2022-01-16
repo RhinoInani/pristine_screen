@@ -1,9 +1,8 @@
+import 'package:Pristine_Screen/home_page.dart';
 import 'package:Pristine_Screen/screen_cleaning.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import 'home_page.dart';
 
 bool cleanOnLaunch = false;
 Color background = Color.fromRGBO(0, 0, 0, 1);

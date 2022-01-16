@@ -64,7 +64,8 @@ class _ScreenCleaningPageState extends State<ScreenCleaningPage>
       onKey: (FocusNode node, RawKeyEvent event) {
         if (event.isMetaPressed) {
           return KeyEventResult.handled;
-        } else if (event.physicalKey != PhysicalKeyboardKey.space) {
+        }
+        if (event.physicalKey != PhysicalKeyboardKey.space) {
           return KeyEventResult.handled;
         } else {
           return KeyEventResult.handled;
@@ -73,6 +74,9 @@ class _ScreenCleaningPageState extends State<ScreenCleaningPage>
       child: RawKeyboardListener(
         focusNode: spaceFocus,
         onKey: (RawKeyEvent key) {
+          if (kMacOsFunctionKeyMap.containsValue(key.logicalKey)) {
+            return;
+          }
           if (key.character == " ") {
             _animationController.forward();
             if (_animationController.isCompleted) {
