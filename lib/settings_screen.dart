@@ -28,7 +28,7 @@ class _SettingScreenState extends State<SettingScreen> {
   }
 
   List<String> urls = [
-    "https://www.instagram.com/pristinescreen/",
+    "https://www.instagram.com/appsbyrhino/",
     "https://github.com/RhinoInani/pristine_screen",
     "https://forms.gle/miQAhC2qUixaEvi87",
     "https://forms.gle/MUhdenYRC2AFJwCz8",
@@ -173,7 +173,6 @@ class _SettingScreenState extends State<SettingScreen> {
                 pressIcon: () {
                   showAboutDialog(
                       context: context,
-                      applicationVersion: '1.0.2',
                       applicationName: 'Pristine Screen',
                       children: [
                         Text(

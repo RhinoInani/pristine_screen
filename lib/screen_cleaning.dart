@@ -74,7 +74,27 @@ class _ScreenCleaningPageState extends State<ScreenCleaningPage>
       child: RawKeyboardListener(
         focusNode: spaceFocus,
         onKey: (RawKeyEvent key) {
-          if (kMacOsFunctionKeyMap.containsValue(key.logicalKey)) {
+          if (key.logicalKey == LogicalKeyboardKey.brightnessUp ||
+              key.logicalKey == LogicalKeyboardKey.brightnessDown ||
+              key.logicalKey == LogicalKeyboardKey.navigateIn ||
+              key.logicalKey == LogicalKeyboardKey.navigateOut ||
+              key.logicalKey == LogicalKeyboardKey.mediaApps ||
+              key.logicalKey == LogicalKeyboardKey.audioVolumeUp ||
+              key.logicalKey == LogicalKeyboardKey.audioVolumeDown ||
+              key.logicalKey == LogicalKeyboardKey.audioVolumeMute ||
+              key.logicalKey == LogicalKeyboardKey.allCandidates) {
+            print('hardcode');
+            _animationController.reverse();
+            return;
+          }
+          if (LogicalKeyboardKey.macosPlane == key.logicalKey.keyId) {
+            print('macosplane');
+            _animationController.reverse();
+            return;
+          }
+          if (kMacOsToLogicalKey.containsValue(key.logicalKey)) {
+            print("test");
+            _animationController.reverse();
             return;
           }
           if (key.character == " ") {

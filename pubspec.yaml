@@ -3,7 +3,7 @@ description: A basic Screen Cleaner application made to turn screen black, and l
 
 publish_to: 'App Store'
 
-version: 1.0.0+1
+version: 1.0.5+8
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
