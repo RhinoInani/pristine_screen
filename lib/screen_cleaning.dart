@@ -1,8 +1,5 @@
-import 'dart:ui';
-
 import 'package:Pristine_Screen/main.dart';
 import 'package:desktop_window/desktop_window.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -87,7 +84,13 @@ class _ScreenCleaningPageState extends State<ScreenCleaningPage>
             _animationController.reverse();
             return;
           }
-          if (LogicalKeyboardKey.macosPlane == key.logicalKey.keyId) {
+          if (key.isMetaPressed) {
+            print('metapressed');
+            spaceFocus.requestFocus();
+            return;
+          }
+          if (LogicalKeyboardKey.macosPlane == key.data.hashCode ||
+              RawKeyEventDataMacOs.modifierOption == 0) {
             print('macosplane');
             _animationController.reverse();
             return;

@@ -36,5 +36,7 @@
 	<false/>
 	<key>UIApplicationSupportsPrintCommand</key>
 	<false/>
+	<key>UIRequiresPersistentWiFi</key>
+	<false/>
 </dict>
 </plist>

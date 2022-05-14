@@ -1,7 +1,6 @@
 import 'package:Pristine_Screen/main.dart';
 import 'package:Pristine_Screen/screen_cleaning.dart';
 import 'package:Pristine_Screen/settings_screen.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {

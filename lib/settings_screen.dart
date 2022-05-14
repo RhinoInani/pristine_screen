@@ -1,4 +1,8 @@
+import 'dart:convert';
+
 import 'package:Pristine_Screen/main.dart';
+import 'package:desktop_multi_window/desktop_multi_window.dart';
+import 'package:desktop_window/desktop_window.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hsvcolor_picker/flutter_hsvcolor_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -128,6 +132,50 @@ class _SettingScreenState extends State<SettingScreen> {
                             inactiveTrackColor: Colors.white10,
                             activeTrackColor: Colors.black,
                             activeColor: Colors.white24,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: MediaQuery.of(context).size.width * 0.035),
+                    height: MediaQuery.of(context).size.height * 0.135,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text(
+                          "Multi-Desktop Support (Beta)",
+                          style: TextStyle(
+                            fontSize:
+                                MediaQuery.of(context).size.longestSide * 0.03,
+                            color: Colors.white,
+                          ),
+                        ),
+                        Tooltip(
+                          message: "Add Screen",
+                          child: IconButton(
+                            splashColor: Colors.white,
+                            icon: Icon(
+                              Icons.add,
+                              color: Colors.white,
+                            ),
+                            onPressed: () async {
+                              final window =
+                                  await DesktopMultiWindow.createWindow(
+                                      jsonEncode({
+                                'args1': 'Pristine Screen',
+                                'args2': 100,
+                                'args3': true,
+                              }));
+                              window
+                                ..setFrame(
+                                    const Offset(0, 0) & const Size(720, 720))
+                                ..center()
+                                ..setTitle('Pristine Screen')
+                                ..show();
+                              DesktopWindow.setFullScreen(true);
+                            },
                           ),
                         ),
                       ],

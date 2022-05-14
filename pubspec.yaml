@@ -3,7 +3,7 @@ description: A basic Screen Cleaner application made to turn screen black, and l
 
 publish_to: 'App Store'
 
-version: 1.0.5+8
+version: 1.0.6+9
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
@@ -15,6 +15,7 @@ dependencies:
   shared_preferences: ^2.0.8
   url_launcher: ^6.0.12
   flutter_hsvcolor_picker: ^1.2.1
+  desktop_multi_window: ^0.0.2
 
 dev_dependencies:
   flutter_test:
